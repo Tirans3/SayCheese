@@ -1,12 +1,11 @@
-﻿@using SayCheese.Data.Models
-@model  IEnumerable<Product>
-
-<div>
+﻿<div>
     <h2>All products are shown here</h2>
   
 </div>
+<h2>@Model.CurrentCategory</h2>
+
 @{ 
-    foreach(var product in Model)
+    foreach(var product in Model.Products)
     {
        <div>
            <h4>Product Name:@product.Name</h4>

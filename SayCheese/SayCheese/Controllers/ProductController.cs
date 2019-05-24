@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
+using SayCheese.ViewModels;
 
 namespace SayCheese.Controllers
 {
@@ -21,8 +22,14 @@ namespace SayCheese.Controllers
         }
         public IActionResult List()
         {
-              var products = _productRepository.Products;
-              return View(products); 
+
+            ProductListViewModel vm = new ProductListViewModel
+            {
+                Products = _productRepository.Products,
+                CurrentCategory="CurrentCategory"
+            };
+
+            return View(vm); 
             
         }
 
