@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using SayCheese.Data.Interfaces;
+using SayCheese.Data.mosk;
 
 namespace SayCheese
 {
@@ -14,6 +16,8 @@ namespace SayCheese
        
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            services.AddTransient<IProductRepository, MockProductRepository>();
             services.AddMvc();
         }
 
