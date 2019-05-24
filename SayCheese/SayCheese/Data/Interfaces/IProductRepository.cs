@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SayCheese.Data.Interfaces
 {
-    interface IProductRepository
+  public  interface IProductRepository
     {
             IEnumerable<Product> Products { get; }
             IEnumerable<Product> PreferredProducts { get; }
