@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SayCheese.Data;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.mosk;
 
@@ -14,9 +17,19 @@ namespace SayCheese
 {
     public class Startup
     {
-       
+        private readonly  IConfigurationRoot _configurationRoot;
+
+        public Startup(IHostingEnvironment hostingEnvironment)
+        {
+            _configurationRoot = new ConfigurationBuilder()
+                .SetBasePath(hostingEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings1.json")
+                .Build();
+        }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SayDbContext>(options =>
+            options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
             services.AddTransient<ICategoryRepository, MockCategoryRepository>();
             services.AddTransient<IProductRepository, MockProductRepository>();
             services.AddMvc();
