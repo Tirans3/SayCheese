@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using SayCheese.Data;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.mosk;
+using SayCheese.Data.Repository;
 
 namespace SayCheese
 {
@@ -25,8 +26,8 @@ namespace SayCheese
         {
             services.AddDbContext<SayDbContext>(options =>
             options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
-            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
-            services.AddTransient<IProductRepository, MockProductRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddMvc();
         }
 
