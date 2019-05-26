@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SayCheese.Data;
 using SayCheese.Data.Interfaces;
+using SayCheese.Data.Models;
 using SayCheese.Data.mosk;
 using SayCheese.Data.Repository;
 
@@ -40,7 +41,7 @@ namespace SayCheese
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-
+            DbInitializer.Seed(app);
         }
     }
 }
