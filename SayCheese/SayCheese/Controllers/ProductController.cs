@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SayCheese.Data.Interfaces;
-using SayCheese.Data.Models;
 using SayCheese.ViewModels;
 
 namespace SayCheese.Controllers
 {
-    public class ProductController :Controller
+    public class ProductController : Controller
     {
-       private readonly IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         private readonly ICategoryRepository _categoryRepository;
 
-       public ProductController(ICategoryRepository categoryRepository, IProductRepository productRepository)
+        public ProductController(ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
@@ -26,13 +21,13 @@ namespace SayCheese.Controllers
             ProductListViewModel vm = new ProductListViewModel
             {
                 Products = _productRepository.Products,
-                CurrentCategory="CurrentCategory"
+                CurrentCategory = "CurrentCategory"
             };
 
-            return View(vm); 
-            
+            return View(vm);
+
         }
 
-       
+
     }
 }

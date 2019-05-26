@@ -3,7 +3,6 @@ using SayCheese.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SayCheese.Data.mosk
 {
@@ -47,15 +46,15 @@ namespace SayCheese.Data.mosk
 
             }
         }
-             public IEnumerable<Product> PreferredProducts { get; }
+        public IEnumerable<Product> PreferredProducts { get; }
 
-              public Product GetProductById(int productId)
-              {
-               throw new NotImplementedException();
-              }
+        public Product GetProductById(int productId)
+        {
+            throw new NotImplementedException();
         }
     }
-    
+}
+
 
 
 

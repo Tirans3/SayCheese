@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +12,7 @@ namespace SayCheese
 {
     public class Startup
     {
-        private readonly  IConfigurationRoot _configurationRoot;
+        private readonly IConfigurationRoot _configurationRoot;
 
         public Startup(IHostingEnvironment hostingEnvironment)
         {
@@ -44,7 +39,7 @@ namespace SayCheese
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-           
+
         }
     }
 }

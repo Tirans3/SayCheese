@@ -1,9 +1,6 @@
 ﻿using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SayCheese.Data.mosk
 {
@@ -16,7 +13,7 @@ namespace SayCheese.Data.mosk
                new Category { CategoryName = "Cheese", Description = "All Cheese" },
                new Category { CategoryName = "Chutney", Description = "All Chutney" }
             };
-   
+
 
     }
 }
