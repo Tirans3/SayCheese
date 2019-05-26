@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using SayCheese.Data;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
-using SayCheese.Data.mosk;
 using SayCheese.Data.Repository;
 
 namespace SayCheese
