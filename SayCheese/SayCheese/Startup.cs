@@ -28,7 +28,10 @@ namespace SayCheese
             options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
 
@@ -38,6 +41,7 @@ namespace SayCheese
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(app);
