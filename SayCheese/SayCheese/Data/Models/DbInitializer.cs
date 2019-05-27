@@ -33,7 +33,7 @@ namespace SayCheese.Data.Models
                             Category = Categories["Cheese"],
                             ImageUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg",
                             InStock = true,
-                            IsPreferredProduct = false,
+                            IsPreferredProduct = true,
                             ImageThumbnailUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg"
                         },
                         new Product
@@ -45,7 +45,7 @@ namespace SayCheese.Data.Models
                             Category = Categories["Chutney"],
                             ImageUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg",
                             InStock = true,
-                            IsPreferredProduct = false,
+                            IsPreferredProduct = true,
                             ImageThumbnailUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg"
                         }
 
