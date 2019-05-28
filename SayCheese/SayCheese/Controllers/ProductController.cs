@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SayCheese.Data.Interfaces;
+using SayCheese.Data.Models;
 using SayCheese.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SayCheese.Controllers
 {
@@ -15,18 +19,36 @@ namespace SayCheese.Controllers
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
         }
-        public IActionResult List()
+        public IActionResult List(string category)
         {
+            string _category = category;
+            IEnumerable<Product> products;
+            string currentCategory = string.Empty;
 
-            ProductListViewModel vm = new ProductListViewModel
+            if (string.IsNullOrEmpty(category))
             {
-                Products = _productRepository.Products,
-                CurrentCategory = "CurrentCategory"
+                products = _productRepository.Products.OrderBy(p => p.ProductId);
+                currentCategory = "All products";
+            }
+            else
+            {
+                if (string.Equals("Cheese", _category, StringComparison.OrdinalIgnoreCase))
+                    products = _productRepository.Products.Where(p => p.Category.CategoryName.Equals("Cheese")).OrderBy(p => p.Name);
+                else
+                    products = _productRepository.Products.Where(p => p.Category.CategoryName.Equals("Chutney")).OrderBy(p => p.Name);
+
+                currentCategory = _category;
+            }
+
+            var productsListViewModel=new ProductListViewModel
+            {
+                Products = products,
+                CurrentCategory = currentCategory
             };
-
-            return View(vm);
-
+            return View(productsListViewModel);
+            
         }
+
 
 
     }
