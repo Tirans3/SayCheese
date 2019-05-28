@@ -1,14 +1,8 @@
-﻿<div>
-    <h2>All products are shown here</h2>
-  
-</div>
-<h2>@Model.CurrentCategory</h2>
+﻿@model ProductListViewModel
 
-@{ 
-    foreach(Product product in Model.Products)
+<div class="row marginTop">
+    @foreach (var product  in Model.Products)
     {
-       @Html.Partial("ProductSummary", product)
-
+        @Html.Partial("ProductSummary", product)
     }
-}
-
+</div>
