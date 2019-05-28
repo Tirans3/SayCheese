@@ -38,8 +38,9 @@ namespace SayCheese
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,SayDbContext context)
         {
+            context.Database.Migrate();
             loggerFactory.AddConsole();
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
