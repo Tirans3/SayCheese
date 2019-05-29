@@ -34,7 +34,7 @@ namespace SayCheese.Data.Models
                             ImageUrl = "~/img/download.jpg",
                             InStock = true,
                             IsPreferredProduct = true,
-                            ImageThumbnailUrl = "http://www.cheesemerchants.com/filebin/images/productlg/gorgonzola-cheese.jpg"
+                            ImageThumbnailUrl = "~/img/download.jpg"
                         },
                         new Product
                         {
@@ -46,11 +46,11 @@ namespace SayCheese.Data.Models
                             ImageUrl = "~/img/download.jpg",
                             InStock = true,
                             IsPreferredProduct = true,
-                            ImageThumbnailUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg"
+                            ImageThumbnailUrl = "~/img/download.jpg"
                         }
 
 
-                       );
+                       ) ;
                 }
 
                 context.SaveChanges();
