@@ -32,6 +32,7 @@ namespace SayCheese
             services.AddTransient<IProductRepository, ProductRepository>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
