@@ -25,5 +25,10 @@ namespace SayCheese.Controllers
             };
             return View(homeViewModel);
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }
