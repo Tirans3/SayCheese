@@ -19,7 +19,7 @@ namespace SayCheese.Components
 
         public IViewComponentResult Invoke()
         {
-            var items = new List<ShoppingCartItem> { new ShoppingCartItem() };//_shoppingCart.GetShoppingCartItems();
+            var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
 
             var shoppingCartViewModel = new ShoppingCartViewModel
