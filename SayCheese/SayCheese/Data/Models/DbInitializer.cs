@@ -31,10 +31,10 @@ namespace SayCheese.Data.Models
                             ShortDescription = "The most widely consumed Cheese",
                             LongDescription = "The most widely consumed Cheese",
                             Category = Categories["Cheese"],
-                            ImageUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg",
+                            ImageUrl = "http://www.cheesemerchants.com/filebin/images/productlg/gorgonzola-cheese.jpg",
                             InStock = true,
                             IsPreferredProduct = true,
-                            ImageThumbnailUrl = "https://www.menu.am/resources/default/img/restaurant_products/big/1500535757-7529.jpeg"
+                            ImageThumbnailUrl = "http://www.cheesemerchants.com/filebin/images/productlg/gorgonzola-cheese.jpg"
                         },
                         new Product
                         {
