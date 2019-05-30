@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SayCheese.Data.Models;
 
 namespace SayCheese.Data
 {
-    public class SayDbContext : DbContext
+    public class SayDbContext : IdentityDbContext<IdentityUser>
     {
         public SayDbContext(DbContextOptions<SayDbContext> options) : base(options)
         {

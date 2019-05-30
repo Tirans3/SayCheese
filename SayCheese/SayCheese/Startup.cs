@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,13 +22,15 @@ namespace SayCheese
         {
             _configurationRoot = new ConfigurationBuilder()
                 .SetBasePath(hostingEnvironment.ContentRootPath)
-                .AddJsonFile("appsettings1.json")
+                .AddJsonFile("appsettings.json")
                 .Build();
         }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SayDbContext>(options =>
             options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+               .AddEntityFrameworkStores<SayDbContext>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -39,14 +42,26 @@ namespace SayCheese
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,SayDbContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,SayDbContext context)
         {
+           
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             context.Database.Migrate();
-            loggerFactory.AddConsole();
-            app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
