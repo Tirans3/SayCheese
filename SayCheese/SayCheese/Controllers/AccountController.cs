@@ -52,6 +52,36 @@ namespace SayCheese.Controllers
                 return View(loginViewModel);
 
             }
+
+            public IActionResult Register() => View();
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Register(LoginViewModel loginViewModel)
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = new IdentityUser() { UserName = loginViewModel.UserName };
+                    var result = await _userManager.CreateAsync(user, loginViewModel.Password);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("LoggedIn", "Account");
+                    }
+                }
+                return View(loginViewModel);
+            }
+
+            public ViewResult LoggedIn() => View();
+
+
+            [HttpPost]
+            [Authorize]
+            public async Task<IActionResult> Logout()
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 
