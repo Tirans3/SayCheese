@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using SayCheese.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SayCheese.Data.Models
+namespace SayCheese.Data
 {
     public class DbInitializer
     {
+
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -50,7 +52,7 @@ namespace SayCheese.Data.Models
                         }
 
 
-                       ) ;
+                       );
                 }
 
                 context.SaveChanges();
@@ -83,5 +85,4 @@ namespace SayCheese.Data.Models
         }
     }
 }
-    
 

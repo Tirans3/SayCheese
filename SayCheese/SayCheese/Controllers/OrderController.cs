@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
 using System;
@@ -20,13 +21,14 @@ namespace SayCheese.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
             if (_shoppingCart.ShoppingCartItems.Count == 0)
             {
-                ModelState.AddModelError("", "Your card is empty, add some drinks first");
+                ModelState.AddModelError("", "Your card is empty, add some products first");
             }
 
             if (ModelState.IsValid)
@@ -44,7 +46,7 @@ namespace SayCheese.Controllers
             ViewBag.CheckoutCompleteMessage = "Thanks for your order! :) ";
             return View();
         }
-
+        [Authorize]
         public IActionResult Checkout()
         {
             return View();
