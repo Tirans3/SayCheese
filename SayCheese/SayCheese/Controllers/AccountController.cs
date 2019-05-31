@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SayCheese.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,6 +58,7 @@ namespace SayCheese.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
+         //   [ ErrorMessage() ]
             public async Task<IActionResult> Register(LoginViewModel loginViewModel)
             {
                 if (ModelState.IsValid)

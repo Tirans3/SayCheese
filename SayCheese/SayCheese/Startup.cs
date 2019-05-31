@@ -57,8 +57,8 @@ namespace SayCheese
                 app.UseHsts();
             }
             context.Database.Migrate();
-            app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseStatusCodePages();
             app.UseSession();
             app.UseAuthentication();
             app.UseMvc(routes =>

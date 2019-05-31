@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SayCheese.Data.Interfaces;
-using SayCheese.Data.Models;
+using SayCheese.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SayCheese.Data.Models;
 
 namespace SayCheese.Controllers
 {

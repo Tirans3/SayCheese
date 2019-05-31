@@ -1,25 +1,27 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SayCheese.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SayCheese.Data.Models
+namespace SayCheese.Data
 {
     public class ShoppingCart
     {
 
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+
+        public string ShoppingCartId { get; set; }
+
         private readonly SayDbContext _sayDbContext;
+
         private ShoppingCart(SayDbContext sayDbContext)
         {
             _sayDbContext = sayDbContext;
         }
-
-        public string ShoppingCartId { get; set; }
-
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         public static ShoppingCart GetCart(IServiceProvider services)
         {

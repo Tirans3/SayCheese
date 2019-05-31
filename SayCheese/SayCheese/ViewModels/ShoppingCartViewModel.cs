@@ -1,4 +1,4 @@
-﻿using SayCheese.Data.Models;
+﻿using SayCheese.Data;
 
 namespace SayCheese.ViewModels
 {

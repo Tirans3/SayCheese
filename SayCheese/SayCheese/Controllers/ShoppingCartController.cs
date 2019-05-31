@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SayCheese.Data;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
 using SayCheese.ViewModels;
