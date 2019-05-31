@@ -33,10 +33,10 @@ namespace SayCheese.Data
                             ShortDescription = "The most widely consumed Cheese",
                             LongDescription = "The most widely consumed Cheese",
                             Category = Categories["Cheese"],
-                            ImageUrl = "~/img/download.jpg",
+                            ImageUrl = "download.jpg",
                             InStock = true,
                             IsPreferredProduct = true,
-                            ImageThumbnailUrl = "~/img/download.jpg"
+                            ImageThumbnailUrl = "download.jpg"
                         },
                         new Product
                         {
@@ -45,10 +45,10 @@ namespace SayCheese.Data
                             ShortDescription = "Cheese Board Chutney",
                             LongDescription = "Our extra fruity Cheese Board Chutney is made with Bramley apples, raisins and walnuts. Cheese Board Chutney is a luxury accompaniment to any cheese board· Why not enjoy Cheese Board Chutney with cold meats and pork pies too?",
                             Category = Categories["Chutney"],
-                            ImageUrl = "~/img/download.jpg",
+                            ImageUrl = "download.jpg",
                             InStock = true,
                             IsPreferredProduct = true,
-                            ImageThumbnailUrl = "~/img/download.jpg"
+                            ImageThumbnailUrl = "download.jpg"
                         }
 
 
