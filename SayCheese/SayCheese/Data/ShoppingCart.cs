@@ -48,7 +48,7 @@ namespace SayCheese.Data
                 {
                     ShoppingCartId = ShoppingCartId,
                     Product = product,
-                    Amount = 1
+                    Amount = amount
                 };
 
                 _sayDbContext.ShoppingCartItems.Add(shoppingCartItem);
