@@ -58,7 +58,8 @@ namespace SayCheese.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-         //   [ ErrorMessage() ]
+           
+         // [ ErrorMessage() ]
             public async Task<IActionResult> Register(LoginViewModel loginViewModel)
             {
                 if (ModelState.IsValid)

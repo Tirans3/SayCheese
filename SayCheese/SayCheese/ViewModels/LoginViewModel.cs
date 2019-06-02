@@ -8,12 +8,18 @@ namespace SayCheese.ViewModels
 {
     public class LoginViewModel
     {
+       
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
-
-        [Required]
+     
+        [Required(ErrorMessage = "Password is required")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$",
+             ErrorMessage = @"Password must be at least 4 characters, 
+no more than 8 characters, and must include at least one upper case letter, 
+one lower case letter, and one numeric digit")]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Display(Name = "RememberMe?")]

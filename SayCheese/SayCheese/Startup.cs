@@ -29,7 +29,14 @@ namespace SayCheese
         {
             services.AddDbContext<SayDbContext>(options =>
             options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
                .AddEntityFrameworkStores<SayDbContext>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
@@ -60,7 +67,7 @@ namespace SayCheese
             app.UseStaticFiles();
             app.UseStatusCodePages();
             app.UseSession();
-            app.UseAuthentication();
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
