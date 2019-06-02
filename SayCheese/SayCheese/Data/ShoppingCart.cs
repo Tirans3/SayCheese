@@ -55,7 +55,7 @@ namespace SayCheese.Data
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.Amount+=amount;
             }
             _sayDbContext.SaveChanges();
         }

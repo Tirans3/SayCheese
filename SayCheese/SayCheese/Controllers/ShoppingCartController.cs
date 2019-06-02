@@ -29,13 +29,13 @@ namespace SayCheese.Controllers
             };
             return View(shoppingCartViewModel);
         }
-        
-        public RedirectToActionResult AddToShoppingCart(int productId)
+        [HttpPost]
+        public RedirectToActionResult AddToShoppingCart(int productId,int count)
         {
             var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId ==productId );
             if (selectedProduct != null)
             {
-                _shoppingCart.AddToCart(selectedProduct, 1);
+                _shoppingCart.AddToCart(selectedProduct, count);
             }
             return RedirectToAction("Index");
         }
