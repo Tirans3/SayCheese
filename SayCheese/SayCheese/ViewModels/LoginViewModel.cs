@@ -22,6 +22,10 @@ namespace SayCheese.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Compare("Password", ErrorMessage = "passwords mismatch")]
+        [DataType(DataType.Password)]
+        public string Confirm { get; set; }
+
         [Display(Name = "RememberMe?")]
         public bool RememberMe { get; set; }
 
