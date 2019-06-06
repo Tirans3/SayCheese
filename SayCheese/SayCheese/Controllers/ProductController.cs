@@ -49,5 +49,15 @@ namespace SayCheese.Controllers
             
         }
 
+        public ViewResult Details(int productId)
+        {
+            var product = _productRepository.Products.FirstOrDefault(d => d.ProductId == productId);
+            if (product == null)
+            {
+                return View("~/Views/Error/Error.cshtml");
+            }
+            return View(product);
+        }
+
     }
 }
