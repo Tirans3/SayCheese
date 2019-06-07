@@ -48,7 +48,7 @@ namespace SayCheese.Controllers
             return View(productsListViewModel);
             
         }
-
+      
         public ViewResult Details(int productId)
         {
             var product = _productRepository.Products.FirstOrDefault(d => d.ProductId == productId);

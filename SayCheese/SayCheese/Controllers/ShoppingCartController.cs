@@ -30,7 +30,7 @@ namespace SayCheese.Controllers
             return View(shoppingCartViewModel);
         }
     
-        public RedirectToActionResult AddToShoppingCart(int productId,int count=1)
+        public RedirectToActionResult AddToShoppingCart(int productId,int count)
         {
             var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId ==productId );
             if (selectedProduct != null)

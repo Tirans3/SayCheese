@@ -58,8 +58,6 @@ namespace SayCheese.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-           
-         // [ ErrorMessage() ]
             public async Task<IActionResult> Register(LoginViewModel loginViewModel)
             {
                 if (ModelState.IsValid)
@@ -69,7 +67,8 @@ namespace SayCheese.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("LoggedIn", "Account");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("LoggedIn", "Account");
                     }
                 }
                 return View(loginViewModel);
