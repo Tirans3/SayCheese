@@ -1,5 +1,23 @@
 ﻿@model ShoppingCartViewModel
 
+
+
+    <script type="text/javascript">
+
+        function func(id) {
+            if (id == minus) {
+                count.innerHTML--;
+            }
+            else {
+                count.innerHTML++;
+            }
+
+        }
+    </script>
+
+
+
+
 <div class="row checkoutForm">
     <h2>Your shopping cart</h2>
     <h4>Here are the products in your shopping cart.</h4>
@@ -17,16 +35,23 @@
             @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
             {
                 <tr>
-                    <td class="text-center">@line.Amount</td>
+                    <td class="text-center">
+                        <button id="minus" onclick="func(this)">&#8722;</button>
+                        <span id="count">
+                            1</span>
+                            <button id="plus" onclick="func(this)">&#43;</button>
+                    </td>
                     <td class="text-left">@line.Product.Name</td>
                     <td class="text-right">@line.Product.Price.ToString("c")</td>
                     <td class="text-right">
                         @((line.Amount * line.Product.Price).ToString("c"))
                     </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" 
-                                               asp-controller="ShoppingCart"
-                                               asp-action="RemoveFromShoppingCart" 
-                                               asp-route-productId="@line.Product.ProductId"></a></td>
+                    <td class="text-center">
+                        <a class="glyphicon glyphicon-remove text-danger remove"
+                           asp-controller="ShoppingCart"
+                           asp-action="RemoveFromShoppingCart"
+                           asp-route-productId="@line.Product.ProductId"></a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -43,13 +68,13 @@
     <div class="text-right">
         <div class="btn-group ">
             <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
-                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    Add more productcs<span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a asp-controller="Product" asp-action="List" asp-route-category="Cheese">Cheese</a></li>
-                    <li><a asp-controller="Product" asp-action="List" asp-route-category="Chutney">Chutney</a></li>
-                </ul>
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Add more productcs<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a asp-controller="Product" asp-action="List" asp-route-category="Cheese">Cheese</a></li>
+                <li><a asp-controller="Product" asp-action="List" asp-route-category="Chutney">Chutney</a></li>
+            </ul>
         </div>
     </div>
 </div>
