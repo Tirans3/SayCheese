@@ -5,16 +5,41 @@
     <script type="text/javascript">
 
         function func(id) {
+
             if (id == minus) {
+
                 count.innerHTML--;
             }
             else {
                 count.innerHTML++;
             }
+            var x = document.getElementById("count").innerText;
 
+            var y = document.getElementById("price").innerText;
+
+            document.getElementById("itog").innerHTML = (parseInt(x) * parseFloat(y)).toFixed(2);
         }
-    </script>
 
+        var sum = 0;
+
+        function Total() {
+
+            var total = document.getElementById("tbody").getElementsByTagName("td");
+
+            for (var i = 0; i < total; i++) {
+
+                if (total[i].id == "itog") {
+
+                    sum += parseInt(total[i].innerHTML);
+                    
+                }
+                
+            }
+
+            document.getElementById("Total").innerHTML = sum;
+        }
+
+    </script>
 
 
 
@@ -31,19 +56,18 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
             @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
             {
                 <tr>
                     <td class="text-center">
-                        <button id="minus" onclick="func(this)">&#8722;</button>
-                        <span id="count">
-                            1</span>
-                            <button id="plus" onclick="func(this)">&#43;</button>
+                        <button id="minus"  onclick="func(this), Total()" >&#8722;</button>
+                        <span id="count" > 1 </span>
+                            <button id="plus" onclick="func(this), Total()">&#43;</button>
                     </td>
                     <td class="text-left">@line.Product.Name</td>
-                    <td class="text-right">@line.Product.Price.ToString("c")</td>
-                    <td class="text-right">
+                    <td id="price" class="text-right">@line.Product.Price.ToString()</td>
+                    <td id="itog" class="text-right">
                         @((line.Amount * line.Product.Price).ToString("c"))
                     </td>
                     <td class="text-center">
@@ -58,7 +82,7 @@
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right">Total:</td>
-                <td class="text-right">
+                <td id="Total" class="text-right">
                     @Model.ShoppingCartTotal.ToString("c")
                 </td>
             </tr>
