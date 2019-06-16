@@ -20,9 +20,11 @@
             document.getElementById("itog").innerHTML = (parseInt(x) * parseFloat(y)).toFixed(2);
         }
 
-        var sum = 0;
+     
 
         function Total() {
+
+            var sum = 0;
 
             var total = document.getElementById("tbody").getElementsByTagName("td");
 
@@ -66,9 +68,9 @@
                             <button id="plus" onclick="func(this), Total()">&#43;</button>
                     </td>
                     <td class="text-left">@line.Product.Name</td>
-                    <td id="price" class="text-right">@line.Product.Price.ToString()</td>
+                    <td id="price" class="text-right">@line.Product.Price</td>
                     <td id="itog" class="text-right">
-                        @((line.Amount * line.Product.Price).ToString("c"))
+                        @(line.Amount * line.Product.Price)
                     </td>
                     <td class="text-center">
                         <a class="glyphicon glyphicon-remove text-danger remove"
@@ -83,7 +85,7 @@
             <tr>
                 <td colspan="3" class="text-right">Total:</td>
                 <td id="Total" class="text-right">
-                    @Model.ShoppingCartTotal.ToString("c")
+                    @Model.ShoppingCartTotal
                 </td>
             </tr>
         </tfoot>
