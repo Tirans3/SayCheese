@@ -11,6 +11,7 @@ using SayCheese.Data;
 using SayCheese.Data.Interfaces;
 using SayCheese.Data.Models;
 using SayCheese.Data.Repository;
+using System;
 
 namespace SayCheese
 {
@@ -67,7 +68,7 @@ namespace SayCheese
             app.UseStaticFiles();
             app.UseStatusCodePages();
             app.UseSession();
-            app.UseIdentity();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -81,6 +82,8 @@ namespace SayCheese
             });
 
             DbInitializer.Seed(app);
+            //AdminInitializer.CreateRoles(service, _configurationRoot).Wait();
+            AdminInitializer.InitializeAsync(app, _configurationRoot).Wait();
         }
     }
 }

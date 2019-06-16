@@ -11,6 +11,7 @@ namespace SayCheese.Data
     public class DbInitializer
     {
 
+
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
