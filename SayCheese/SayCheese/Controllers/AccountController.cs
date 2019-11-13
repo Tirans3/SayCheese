@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using 
 namespace SayCheese.Controllers
 {
         public class AccountController : Controller
@@ -32,8 +32,8 @@ namespace SayCheese.Controllers
             [HttpPost]
             public async Task<IActionResult> Login(LoginViewModel loginViewModel)
             {
-                if (!ModelState.IsValid)
-                    return View(loginViewModel);
+            if (ModelState.IsValid)
+            {  //return View(loginViewModel);
 
                 var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
 
@@ -48,7 +48,7 @@ namespace SayCheese.Controllers
                         return Redirect(loginViewModel.ReturnUrl);
                     }
                 }
-
+            }
                 ModelState.AddModelError("", "Username/password not found");
                 return View(loginViewModel);
 
