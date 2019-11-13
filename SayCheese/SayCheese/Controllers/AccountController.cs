@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EmailApp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SayCheese.ViewModels;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using 
+ 
 namespace SayCheese.Controllers
 {
         public class AccountController : Controller
@@ -67,8 +68,25 @@ namespace SayCheese.Controllers
 
                     if (result.Succeeded)
                     {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("LoggedIn", "Account");
+                    var codei = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        new { userId = loginViewModel.UserName, code=codei },
+                        protocol: HttpContext.Request.Scheme);
+                    EmailService emailService = new EmailService();
+                    try
+                    {
+
+                    await emailService.SendEmailAsync("tirans3@mail.ru", "Confirm your account",
+                        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+                    }
+                    catch
+                    {
+                        return RedirectToAction("Register", "Account");
+                    }
+                   
+                   
                     }
                 }
                 return View(loginViewModel);
@@ -76,8 +94,28 @@ namespace SayCheese.Controllers
 
             public ViewResult LoggedIn() => View();
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByNameAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+                return RedirectToAction("LoggedIn", "Account");
+            else
+                return View("Error");
+        }
 
-            [HttpPost]
+
+        [HttpPost]
             [Authorize]
             public async Task<IActionResult> Logout()
             {

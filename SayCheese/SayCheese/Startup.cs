@@ -38,7 +38,8 @@ namespace SayCheese
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
-               .AddEntityFrameworkStores<SayDbContext>();
+               .AddEntityFrameworkStores<SayDbContext>()
+               .AddDefaultTokenProviders();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
