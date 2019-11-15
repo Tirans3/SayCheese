@@ -23,7 +23,7 @@ namespace EmailApp
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 client.Connect("smtp.gmail.com", 465, true);
 
-                client.Authenticate( "Tiran", "qazwsx*963.Z");
+                client.Authenticate("tirans3777@gmail.com", "qazwsx*963.Z");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
