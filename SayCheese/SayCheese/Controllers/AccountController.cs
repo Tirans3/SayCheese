@@ -31,27 +31,29 @@ namespace SayCheese.Controllers
             }
 
             [HttpPost]
-            public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+            public async Task<IActionResult> Login(LoginViewModel  model )
             {
-            if (ModelState.IsValid)
-            {  //return View(loginViewModel);
+               if (ModelState.IsValid)
+               {  //return View(loginViewModel);
 
-                var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
+                   var user = await _userManager.FindByNameAsync(model.UserName);
 
-                if (user != null)
-                {
-                    var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, loginViewModel.RememberMe, false);
-                    if (result.Succeeded)
-                    {
-                        if (string.IsNullOrEmpty(loginViewModel.ReturnUrl))
-                            return RedirectToAction("Index", "Home");
+                   if (user != null)
+                     {
+                        var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                        if (result.Succeeded)
+                        {
+                             if (string.IsNullOrEmpty(model.ReturnUrl))
 
-                        return Redirect(loginViewModel.ReturnUrl);
-                    }
-                }
-            }
+                                return RedirectToAction("Index", "Home");
+                             else
+                               return Redirect(model.ReturnUrl);
+                        }
+                   }
+               }
                 ModelState.AddModelError("", "Username/password not found");
-                return View(loginViewModel);
+
+                return View(model);
 
             }
 
@@ -59,45 +61,47 @@ namespace SayCheese.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Register(LoginViewModel loginViewModel)
+            public async Task<IActionResult> Register(LoginViewModel model)
             {
                 if (ModelState.IsValid)
                 {
-                    var user = new IdentityUser() { UserName = loginViewModel.UserName };
-                    var result = await _userManager.CreateAsync(user, loginViewModel.Password);
+                    var user = new IdentityUser() { UserName = model.UserName };
+                    var result = await _userManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
                     {
-                    var codei = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(
-                        "ConfirmEmail",
-                        "Account",
-                        new { userId = loginViewModel.UserName, code=codei },
-                        protocol: HttpContext.Request.Scheme);
-                    EmailService emailService = new EmailService();
-                    try
-                    {
+                       var codei = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                       var callbackUrl = Url.Action(
+                           "ConfirmEmail",
+                           "Account",
+                           new { userId = model.UserName, code=codei },
+                           protocol: HttpContext.Request.Scheme);
 
-                    await emailService.SendEmailAsync("tirans3@mail.ru", "Confirm your account",
-                        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
-                    }
-                    catch
-                    {
-                        return RedirectToAction("Register", "Account");
-                    }
-                   
+                          EmailService emailService = new EmailService();
+
+                         try
+                         {
+                            await emailService.SendEmailAsync("tirans3@mail.ru", "Confirm your account",
+                             $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+                         }
+                         catch
+                         {
+                             return RedirectToAction("Register", "Account");
+                         }
+
+                        return RedirectToAction("LoggedIn", "Account");
                    
                     }
                 }
-                return View(loginViewModel);
+                return View(model);
             }
 
-            public ViewResult LoggedIn() => View();
+        
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        {
+          [HttpGet]
+          [AllowAnonymous]
+           public async Task<IActionResult> ConfirmEmail(string userId, string code)
+         {
             if (userId == null || code == null)
             {
                 return View("Error");
@@ -108,20 +112,27 @@ namespace SayCheese.Controllers
                 return View("Error");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
+
             if (result.Succeeded)
-                return RedirectToAction("LoggedIn", "Account");
+            {
+                LoginViewModel login = new LoginViewModel() { UserName = user.UserName };
+                return View("Login",login);
+            }
             else
                 return View("Error");
-        }
+           }
 
 
-        [HttpPost]
+            [HttpPost]
             [Authorize]
             public async Task<IActionResult> Logout()
             {
                 await _signInManager.SignOutAsync();
                 return RedirectToAction("Index", "Home");
             }
+
+            public ViewResult LoggedIn() => View();
+
         }
-    }
+}
 
