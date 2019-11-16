@@ -57,6 +57,7 @@ namespace SayCheese.Controllers
 
             }
 
+            [HttpGet]
             public IActionResult Register() => View();
 
             [HttpPost]

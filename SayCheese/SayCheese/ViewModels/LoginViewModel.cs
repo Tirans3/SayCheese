@@ -10,7 +10,7 @@ namespace SayCheese.ViewModels
     {
        
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
      
         [Required(ErrorMessage = "Password is required")]
@@ -21,10 +21,6 @@ namespace SayCheese.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
-        [Compare("Password", ErrorMessage = "passwords mismatch")]
-        [DataType(DataType.Password)]
-        public string Confirm { get; set; }
 
         [Display(Name = "RememberMe?")]
         public bool RememberMe { get; set; }
