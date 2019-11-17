@@ -60,30 +60,15 @@ namespace SayCheese.Data
             _sayDbContext.SaveChanges();
         }
 
-        public int RemoveFromCart(Product product)
+        public void RemoveFromCart(Product product)
         {
             var shoppingCartItem =
                     _sayDbContext.ShoppingCartItems.SingleOrDefault(
                         s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
-
-            var localAmount = 0;
-
-            if (shoppingCartItem != null)
-            {
-                if (shoppingCartItem.Amount > 1)
-                {
-                    shoppingCartItem.Amount--;
-                    localAmount = shoppingCartItem.Amount;
-                }
-                else
-                {
+          
                     _sayDbContext.ShoppingCartItems.Remove(shoppingCartItem);
-                }
-            }
 
             _sayDbContext.SaveChanges();
-
-            return localAmount;
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
@@ -111,6 +96,23 @@ namespace SayCheese.Data
             var total = _sayDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Product.Price * c.Amount).Sum();
             return total;
+        }
+
+        public void EditAmount(int productId, string sign)
+        {
+            var shoppingCartItem =
+                    _sayDbContext.ShoppingCartItems.SingleOrDefault(
+                        s => s.Product.ProductId == productId && s.ShoppingCartId == ShoppingCartId);
+            if (sign.Equals("plus"))
+
+                shoppingCartItem.Amount++;
+            else
+               if (shoppingCartItem.Amount != 0)
+                shoppingCartItem.Amount--;
+            else
+                return;
+
+            _sayDbContext.SaveChanges();
         }
     }
 }

@@ -29,17 +29,17 @@ namespace SayCheese.Controllers
             };
             return View(shoppingCartViewModel);
         }
-    
-        public RedirectToActionResult AddToShoppingCart(int productId,int count)
+
+        public RedirectToActionResult AddToShoppingCart(int productId, int count)
         {
-            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId ==productId );
+            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
             if (selectedProduct != null)
             {
                 _shoppingCart.AddToCart(selectedProduct, count);
             }
             return RedirectToAction("Index");
         }
-
+    
         public RedirectToActionResult RemoveFromShoppingCart(int productId)
         {
             var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
@@ -47,6 +47,16 @@ namespace SayCheese.Controllers
             {
                 _shoppingCart.RemoveFromCart(selectedProduct);
             }
+            return RedirectToAction("Index");
+        }
+
+      
+        public RedirectToActionResult EditAmount(int productId ,string sign)
+        {
+            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
+
+            _shoppingCart.EditAmount(productId, sign);
+
             return RedirectToAction("Index");
         }
 

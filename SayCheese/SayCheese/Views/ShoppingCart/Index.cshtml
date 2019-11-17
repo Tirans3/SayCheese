@@ -55,7 +55,7 @@
                 <th>Product</th>
                 <th class="text-right">Price</th>
                 <th class="text-right">Subtotal</th>
-                <th></th>
+                <th class="text-right">Remove</th>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -63,17 +63,30 @@
             {
                 <tr>
                     <td class="text-center">
-                        <button id="minus"  onclick="func(this), Total()" >&#8722;</button>
-                        <span id="count" > @line.Amount</span>
-                            <button id="plus" onclick="func(this), Total()">&#43;</button>
+                        <a id="minus" style="text-decoration:none"
+                           asp-controller="ShoppingCart"
+                           asp-action="EditAmount"
+                           asp-route-productId="@line.Product.ProductId"
+                           asp-route-sign="minus">
+                            &#8722;
+                        </a>
+                        <span id="count"> @line.Amount</span>
+                        <a id="plus" style="text-decoration:none"
+                           asp-controller="ShoppingCart"
+                           asp-action="EditAmount"
+                           asp-route-productId="@line.Product.ProductId"
+                           asp-route-sign="plus">
+                            &#43;
+                        </a>
                     </td>
+
                     <td class="text-left">@line.Product.Name</td>
                     <td id="price" class="text-right">@line.Product.Price</td>
                     <td id="itog" class="text-right">
                         @(line.Amount * line.Product.Price)
                     </td>
                     <td class="text-center">
-                        <a class="glyphicon glyphicon-remove text-danger remove"
+                        <a class="glyphicon glyphicon-remove text-danger remove" 
                            asp-controller="ShoppingCart"
                            asp-action="RemoveFromShoppingCart"
                            asp-route-productId="@line.Product.ProductId"></a>
